@@ -3,7 +3,7 @@ export default function TaskItem(props) {
 
             <div className="task-item">
                 <input type="checkbox" />
-                <p>{props.task}</p>
+                <p>{props.title}</p>
                 <button>delete</button>
             </div>
 
