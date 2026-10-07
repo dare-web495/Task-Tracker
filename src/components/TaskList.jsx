@@ -1,7 +1,7 @@
 import TaskItem from "./TaskItem";
 
-export default function TaskList(props) {
-
+export default function TaskList({tasks, toggleDone}) {
+    
     return (
         
         <div>
@@ -17,11 +17,17 @@ export default function TaskList(props) {
                 {/* Yet to be finished */}
                 <button>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M603.5-193.5Q560-237 560-300t43.5-106.5Q647-450 710-450t106.5 43.5Q860-363 860-300t-43.5 106.5Q773-150 710-150t-106.5-43.5Zm156-57Q780-271 780-300t-20.5-49.5Q739-370 710-370t-49.5 20.5Q640-329 640-300t20.5 49.5Q681-230 710-230t49.5-20.5ZM160-260v-80h320v80H160Zm-16.5-293.5Q100-597 100-660t43.5-106.5Q187-810 250-810t106.5 43.5Q400-723 400-660t-43.5 106.5Q313-510 250-510t-106.5-43.5Zm156-57Q320-631 320-660t-20.5-49.5Q279-730 250-730t-49.5 20.5Q180-689 180-660t20.5 49.5Q221-590 250-590t49.5-20.5ZM480-620v-80h320v80H480Zm230 320ZM250-660Z"/></svg>
-                    <div>filter</div>
+                    <span>filter</span>
                 </button>
             </div>
 
-            { props ? <ul> <TaskItem title={props.title}/> </ul> : <div>List is empty</div> }
+            { tasks.length > 0 ? (
+                <ul>
+                    {tasks.map(task=>(
+                        <li key={task.id}><TaskItem task={task} toggleDone={toggleDone}/></li>
+                    ))}
+                </ul>
+            ) : (<div>List is empty</div>) }
 
         </div>
     );

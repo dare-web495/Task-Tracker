@@ -1,19 +1,26 @@
+import { useState } from "react";
 import Header from "./components/Header";
-import TaskItem from "./components/TaskItem";
 import TaskList from "./components/TaskList";
 
-const lst = [
+
+export default function App() {
+    const [tasks, setTasks] = useState([
         { id: 1, title: "Learn React", done: false },
         { id: 2, title: "Learn Django", done: false },
         { id: 3, title: "Learn HTML", done: true },
         { id: 4, title: "Learn Swift", done: true }
-    ];
+    ]);
 
-export default function App() {
+    const toggleDone = (id) => {
+        setTasks(tasks.map(task => (
+            task.id === id ? {...task, done : !task.done} : task
+        )));
+    }
+
     return (
         <div>
-            <Header />
-            <TaskList props={<TaskItem list={lst}/>}/>
+            <Header name={"Console Wachia"}/>
+            <TaskList tasks={tasks} toggleDone={toggleDone}/>
         </div>
     )
 }
