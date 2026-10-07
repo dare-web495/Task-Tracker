@@ -1,6 +1,6 @@
 import TaskItem from "./TaskItem";
 
-export default function TaskList({tasks, toggleDone}) {
+export default function TaskList({tasks, toggleDone, deleteTask}) {
     
     return (
         
@@ -24,7 +24,7 @@ export default function TaskList({tasks, toggleDone}) {
             { tasks.length > 0 ? (
                 <ul>
                     {tasks.map(task=>(
-                        <li key={task.id}><TaskItem task={task} toggleDone={toggleDone}/></li>
+                        <li key={task.id}><TaskItem task={task} toggleDone={toggleDone} deleteTask={deleteTask}/></li>
                     ))}
                 </ul>
             ) : (<div>List is empty</div>) }

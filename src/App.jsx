@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
-import Navbar from "./components/Navbar";
 
 
 export default function App() {
@@ -18,12 +17,14 @@ export default function App() {
         )));
     }
 
+    const deleteTask = (id) => {
+        setTasks(tasks.filter(task => task.id !== id))
+    }
+
     return (
         <div>
-            <Navbar />
-            
             <Header name={"Console Wachia"}/>
-            <TaskList tasks={tasks} toggleDone={toggleDone}/>
+            <TaskList tasks={tasks} toggleDone={toggleDone} deleteTask={deleteTask}/>
         </div>
     )
 }
