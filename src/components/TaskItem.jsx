@@ -4,7 +4,7 @@ export default function TaskItem({task, toggleDone}) {
 
             <div className="task-item">
                 <input type="checkbox" checked={task.done} onChange={() => toggleDone(task.id)}/>
-                <label>{task.title}</label>
+                <span className={task.done ? "done-task" : "pending-task"}>{task.title}</span>
                 <button>delete</button>
             </div>
 
