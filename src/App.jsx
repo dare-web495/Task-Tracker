@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
+import Navbar from "./components/Navbar";
 
 
 export default function App() {
@@ -19,6 +20,8 @@ export default function App() {
 
     return (
         <div>
+            <Navbar />
+            
             <Header name={"Console Wachia"}/>
             <TaskList tasks={tasks} toggleDone={toggleDone}/>
         </div>
