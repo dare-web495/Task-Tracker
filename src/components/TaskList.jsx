@@ -1,12 +1,32 @@
+import { useState } from "react";
 import TaskItem from "./TaskItem";
 
-export default function TaskList({tasks, toggleDone, deleteTask}) {
+export default function TaskList({tasks, toggleDone, deleteTask, addTask}) {
+    const [title, setTitle] = useState("");
+    const saveTitle = (e) => {
+        setTitle(e.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const trimmed = title.trim();
+        if (trimmed === "") {
+            alert("Must input a task");
+            return;
+        }
+        addTask(trimmed);
+        setTitle("");
+    }
     
     return (
         
         <div>
             <div className="input-div">
-                <input className="task-input" type="text" placeholder="Enter task..." />
+                <form action="submit" onSubmit={handleSubmit}>
+                    <input className="task-input" type="text" placeholder="Enter task..." value={title} onChange={saveTitle}/>
+                    <button>Add</button>
+                </form>
+                
             </div>
 
             <div className="task-list-lbl">

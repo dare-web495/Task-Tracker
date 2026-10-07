@@ -21,10 +21,19 @@ export default function App() {
         setTasks(tasks.filter(task => task.id !== id))
     }
 
+    const addTask = (title) => {
+        setTasks(task => {
+            const nxtId = task.reduce((max, task) => (task.id > max ? task.id : max), 0);
+            const newObj = {id: nxtId+1, title: title, done: false};
+
+            return [...task, newObj]
+        })
+    }
+
     return (
         <div>
             <Header name={"Console Wachia"}/>
-            <TaskList tasks={tasks} toggleDone={toggleDone} deleteTask={deleteTask}/>
+            <TaskList tasks={tasks} toggleDone={toggleDone} deleteTask={deleteTask} addTask={addTask}/>
         </div>
     )
 }
