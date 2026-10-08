@@ -5,3 +5,25 @@
 .pending-task {
     text-decoration: none;
 }
+
+.filter-btn {
+    align-items: center;
+    display: flex;
+    justify-content: center;   
+}
+
+.dropdown-menu {
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    max-width: fit-content;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-option {
+    display: block;
+    border-style: none;
+    font-size: 15px;
+    background-color: transparent;
+}
