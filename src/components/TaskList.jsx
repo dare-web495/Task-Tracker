@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TaskItem from "./TaskItem";
 
-function Dropdown({setIsOpen, filterList, setFilterList}) {
+function Dropdown({setIsOpen, setFilterList}) {
     const handleSelect = (selected) => {
         setFilterList(selected);
         setIsOpen(false);
@@ -39,12 +39,14 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask}) {
         setIsOpen(!isOpen);
     }
 
-    const [filterList, setFilterList] = useState("all");
+    const [filterdList, setFilterList] = useState("all");
     const filtered = tasks.filter((task) => {
-        if (filterList === "active") return task.done === false;
-        if (filterList === "completed") return task.done === true;
+        if (filterdList === "active") return task.done === false;
+        if (filterdList === "completed") return task.done === true;
         return true;
-    })
+    });
+
+    const noOfTasks = tasks.filter(task => task.done === false).length;
     
     return (
         
@@ -66,10 +68,10 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask}) {
                     <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#302e2e"><path d="M603.5-193.5Q560-237 560-300t43.5-106.5Q647-450 710-450t106.5 43.5Q860-363 860-300t-43.5 106.5Q773-150 710-150t-106.5-43.5Zm156-57Q780-271 780-300t-20.5-49.5Q739-370 710-370t-49.5 20.5Q640-329 640-300t20.5 49.5Q681-230 710-230t49.5-20.5ZM160-260v-80h320v80H160Zm-16.5-293.5Q100-597 100-660t43.5-106.5Q187-810 250-810t106.5 43.5Q400-723 400-660t-43.5 106.5Q313-510 250-510t-106.5-43.5Zm156-57Q320-631 320-660t-20.5-49.5Q279-730 250-730t-49.5 20.5Q180-689 180-660t20.5 49.5Q221-590 250-590t49.5-20.5ZM480-620v-80h320v80H480Zm230 320ZM250-660Z"/></svg>
                     <span className="filter-keyword">filter</span>
                 </button>
+                <button className="filtered-category">{filterdList}</button>
 
-                {isOpen && <Dropdown filterList={filterList} setFilterList={setFilterList} setIsOpen={setIsOpen}/>}
-                
             </div>
+            {isOpen && <Dropdown setFilterList={setFilterList} setIsOpen={setIsOpen}/>}
 
             { tasks.length > 0 ? (
                 <ul>
@@ -78,6 +80,10 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask}) {
                     ))}
                 </ul>
             ) : (<div>List is empty</div>) }
+
+            <div>
+                {noOfTasks} tasks left
+            </div>
 
         </div>
     );
