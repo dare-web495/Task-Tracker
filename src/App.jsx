@@ -1,15 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import TaskList from "./components/TaskList";
 
 
 export default function App() {
-    const [tasks, setTasks] = useState([
-        { id: 1, title: "Learn React", done: false },
-        { id: 2, title: "Learn Django", done: false },
-        { id: 3, title: "Learn HTML", done: true },
-        { id: 4, title: "Learn Swift", done: true }
-    ]);
+    const [tasks, setTasks] = useState(() => {
+        const savedTasks = localStorage.getItem("tasks");
+        if (savedTasks === null) {
+            return [];
+        } else {
+            try {
+                const array = JSON.parse(savedTasks);
+                if (Array.isArray(array)) {
+                    return array;
+                } else {
+                    console.log("savedTasks is not an array");
+                    return [];
+                }
+            } catch (error) {
+                console.log("Failed to parse string as:" + error);
+                return [];
+            }
+        }
+    });
+
+    useEffect(() => {
+        const taskStr = JSON.stringify(tasks);
+        localStorage.setItem("tasks", taskStr);
+    }, [tasks]);
 
     const toggleDone = (id) => {
         setTasks(tasks.map(task => (
@@ -22,11 +40,11 @@ export default function App() {
     }
 
     const addTask = (title) => {
-        setTasks(task => {
-            const nxtId = task.reduce((max, task) => (task.id > max ? task.id : max), 0);
+        setTasks(prevTask => {
+            const nxtId = prev.reduce((max, prevTask) => (prevTask.id > max ? prevTask.id : max), 0);
             const newObj = {id: nxtId+1, title: title, done: false};
 
-            return [...task, newObj]
+            return [...prevTask, newObj]
         })
     }
 
