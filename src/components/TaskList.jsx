@@ -76,21 +76,25 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask}) {
                     
                 </div>
             </div>
+
             <div className="filter-option-div">
                 {isOpen && <Dropdown setFilterList={setFilterList} setIsOpen={setIsOpen}/>}
             </div>
             
+            <div className="row3">
+                <div className="list-of-tasks">
+                    { tasks.length > 0 ? (
+                        <ul>
+                            {filtered.map(task=>(
+                                <li key={task.id}><TaskItem task={task} toggleDone={toggleDone} deleteTask={deleteTask}/></li>
+                            ))}
+                        </ul>
+                    ) : (<div>List is empty</div>) }
+                </div>
+            </div>
 
-            { tasks.length > 0 ? (
-                <ul>
-                    {filtered.map(task=>(
-                        <li key={task.id}><TaskItem task={task} toggleDone={toggleDone} deleteTask={deleteTask}/></li>
-                    ))}
-                </ul>
-            ) : (<div>List is empty</div>) }
-
-            <div>
-                {noOfTasks} tasks left
+            <div className="row3">
+                <p>{noOfTasks} tasks left</p>
             </div>
 
         </div>
