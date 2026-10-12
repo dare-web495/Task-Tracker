@@ -16,7 +16,7 @@ function Dropdown({setIsOpen, setFilterList}) {
     );
 }
 
-export default function TaskList({tasks, toggleDone, deleteTask, addTask}) {
+export default function TaskList({tasks, toggleDone, deleteTask, addTask, updateTask}) {
     const [title, setTitle] = useState("");
 
     const saveTitle = (e) => {
@@ -86,7 +86,7 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask}) {
                     { tasks.length > 0 ? (
                         <ul>
                             {filtered.map(task=>(
-                                <li key={task.id}><TaskItem task={task} toggleDone={toggleDone} deleteTask={deleteTask}/></li>
+                                <li key={task.id}><TaskItem task={task} toggleDone={toggleDone} deleteTask={deleteTask} updateTask={updateTask}/></li>
                             ))}
                         </ul>
                     ) : (<div>List is empty</div>) }
