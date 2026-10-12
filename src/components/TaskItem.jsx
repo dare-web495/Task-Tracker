@@ -3,7 +3,6 @@ import EditableTitle from "./EditableTitle";
 
 export default function TaskItem({task, toggleDone, deleteTask, updateTask}) {
 
-
     return (
 
             <div className="task-item">

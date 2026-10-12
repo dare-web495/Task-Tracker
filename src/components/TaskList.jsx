@@ -1,20 +1,6 @@
 import { useState } from "react";
 import TaskItem from "./TaskItem";
-
-function Dropdown({setIsOpen, setFilterList}) {
-    const handleSelect = (selected) => {
-        setFilterList(selected);
-        setIsOpen(false);
-    }
-
-    return (
-        <div className="dropdown-menu">
-            <button onClick={() => handleSelect("All")} className="dropdown-option">All</button>
-            <button onClick={() => handleSelect("Active")} className="dropdown-option">Active</button>
-            <button onClick={() => handleSelect("Completed")} className="dropdown-option">Completed</button>
-        </div>
-    );
-}
+import FilterMenu from "./FilterMenu";
 
 export default function TaskList({tasks, toggleDone, deleteTask, addTask, updateTask}) {
     const [title, setTitle] = useState("");
@@ -100,7 +86,7 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask, update
             </div>
 
             <div className="filter-option-div">
-                {isOpen && <Dropdown setFilterList={setFilterList} setIsOpen={setIsOpen}/>}
+                {isOpen && <FilterMenu setFilterList={setFilterList} setIsOpen={setIsOpen}/>}
             </div>
             
             <div className="row3">
@@ -114,6 +100,6 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask, update
             </div>
 
         </div>
-        
+
     );
 }
