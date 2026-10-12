@@ -46,6 +46,28 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask, update
         return true;
     });
 
+    const filterHandler = () => {
+
+        if (tasks.length > 0) {
+            if (filtered.length > 0) {
+                return (<ul>
+                    {filtered.map(task => (
+                        <li key={task.id}><TaskItem task={task} toggleDone={toggleDone} deleteTask={deleteTask} updateTask={updateTask} /></li>
+                    ))}
+                </ul>);
+            } else {
+                if (filterdList === "Completed") {
+                    return <p>No completed tasks yet</p>;
+                } else if (filterdList === "Active") { 
+                    return <p>All tasks completed</p>; 
+                }
+            }
+        } else { 
+            <div>List is empty</div> 
+        }
+
+    }
+
     const noOfTasks = tasks.filter(task => task.done === false).length;
     
     return (
@@ -55,7 +77,7 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask, update
                 <form onSubmit={handleSubmit}>
                     <input className="task-input" type="text" placeholder="Enter task..." value={title} onChange={saveTitle}/>
                     <button className="task-add-btn">Add</button>
-                </form>
+                </form> 
                 
             </div>
 
@@ -83,13 +105,7 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask, update
             
             <div className="row3">
                 <div className="list-of-tasks">
-                    { tasks.length > 0 ? (
-                        <ul>
-                            {filtered.map(task=>(
-                                <li key={task.id}><TaskItem task={task} toggleDone={toggleDone} deleteTask={deleteTask} updateTask={updateTask}/></li>
-                            ))}
-                        </ul>
-                    ) : (<div>List is empty</div>) }
+                    {filterHandler()}
                 </div>
             </div>
 
