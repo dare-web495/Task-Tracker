@@ -23,6 +23,7 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask, update
     const [isOpen, setIsOpen] = useState(false);
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
+        
     }
 
     const [filterdList, setFilterList] = useState("All");
@@ -36,20 +37,20 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask, update
 
         if (tasks.length > 0) {
             if (filtered.length > 0) {
-                return (<ul>
+                return (<div className="div-list">
                     {filtered.map(task => (
-                        <li key={task.id}><TaskItem task={task} toggleDone={toggleDone} deleteTask={deleteTask} updateTask={updateTask} /></li>
+                        <div key={task.id}><TaskItem task={task} toggleDone={toggleDone} deleteTask={deleteTask} updateTask={updateTask} /></div>
                     ))}
-                </ul>);
+                </div>);
             } else {
                 if (filterdList === "Completed") {
-                    return <p>No completed tasks yet</p>;
+                    return <p className="ifempty-cmt">No completed tasks yet</p>;
                 } else if (filterdList === "Active") { 
-                    return <p>All tasks completed</p>; 
+                    return <p className="ifempty-cmt">All tasks completed</p>; 
                 }
             }
         } else { 
-            <div>List is empty</div> 
+            <div className="ifempty-cmt">List is empty</div> 
         }
 
     }
@@ -75,20 +76,20 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask, update
 
                     <div className="filter-icon">
                         <button className="filter-btn" onClick={() => toggleDropdown()}>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#302e2e"><path d="M603.5-193.5Q560-237 560-300t43.5-106.5Q647-450 710-450t106.5 43.5Q860-363 860-300t-43.5 106.5Q773-150 710-150t-106.5-43.5Zm156-57Q780-271 780-300t-20.5-49.5Q739-370 710-370t-49.5 20.5Q640-329 640-300t20.5 49.5Q681-230 710-230t49.5-20.5ZM160-260v-80h320v80H160Zm-16.5-293.5Q100-597 100-660t43.5-106.5Q187-810 250-810t106.5 43.5Q400-723 400-660t-43.5 106.5Q313-510 250-510t-106.5-43.5Zm156-57Q320-631 320-660t-20.5-49.5Q279-730 250-730t-49.5 20.5Q180-689 180-660t20.5 49.5Q221-590 250-590t49.5-20.5ZM480-620v-80h320v80H480Zm230 320ZM250-660Z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#fbfbfb"><path d="M603.5-193.5Q560-237 560-300t43.5-106.5Q647-450 710-450t106.5 43.5Q860-363 860-300t-43.5 106.5Q773-150 710-150t-106.5-43.5Zm156-57Q780-271 780-300t-20.5-49.5Q739-370 710-370t-49.5 20.5Q640-329 640-300t20.5 49.5Q681-230 710-230t49.5-20.5ZM160-260v-80h320v80H160Zm-16.5-293.5Q100-597 100-660t43.5-106.5Q187-810 250-810t106.5 43.5Q400-723 400-660t-43.5 106.5Q313-510 250-510t-106.5-43.5Zm156-57Q320-631 320-660t-20.5-49.5Q279-730 250-730t-49.5 20.5Q180-689 180-660t20.5 49.5Q221-590 250-590t49.5-20.5ZM480-620v-80h320v80H480Zm230 320ZM250-660Z"/></svg>
                             <span className="filter-keyword">Filter</span>
                         </button>
                         <button className="filtered-category">{filterdList}</button>
-
+                        <div className="filter-option-div">
+                            {isOpen && <FilterMenu setFilterList={setFilterList} setIsOpen={setIsOpen} />}
+                        </div>
                     </div>
                     
                 </div>
             </div>
 
-            <div className="filter-option-div">
-                {isOpen && <FilterMenu setFilterList={setFilterList} setIsOpen={setIsOpen}/>}
-            </div>
             
+
             <div className="row3">
                 <div className="list-of-tasks">
                     {filterHandler()}
@@ -96,7 +97,7 @@ export default function TaskList({tasks, toggleDone, deleteTask, addTask, update
             </div>
 
             <div className="row3">
-                <p>{noOfTasks} tasks left</p>
+                <p className="ifempty-cmt">{noOfTasks} tasks left</p>
             </div>
 
         </div>

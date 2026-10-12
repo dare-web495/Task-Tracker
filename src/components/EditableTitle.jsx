@@ -31,7 +31,7 @@ export default function EditableTitle({ task, updateTask }) {
         return <span onDoubleClick={() => {
             setIsEditing(true);
             setDraft(task.title);
-        }} className={task.done ? "done-task" : "pending-task"}>{task.title}</span>;
+        }} className={task.done ? "done-task" : "pending-task"} id="task-name">{task.title}</span>;
     } else {
         return <input placeholder="Set new task" value={draft} onChange={(e) => setDraft(e.target.value)} autoFocus onBlur={handleBlur} onKeyDown={handleKeyDown} />;
     }
